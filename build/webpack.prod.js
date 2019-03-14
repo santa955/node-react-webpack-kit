@@ -17,7 +17,25 @@ module.exports = webpackMerge(basecConfig, {
   module: {
     rules: [
       {
+        test: /\.less$/,
+        exclude: /(node_modules)/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: false,
+              modules: true,
+              camelCase: true,
+              localIdentName: '[local]___[hash:base64:5]',
+            },
+          },
+          'less-loader',
+        ],
+      },
+      {
         test: /\.(css|scss)$/,
+        exclude: /(node_modules)/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -54,10 +72,10 @@ module.exports = webpackMerge(basecConfig, {
           priority: 10,
           chunks: 'initial' // 只打包初始时依赖的第三方
         },
-        elementUI: {
-          name: 'chunk-elementUI', // 单独将 elementUI 拆包
-          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-          test: /[\\/]node_modules[\\/]element-ui[\\/]/
+        antd: {
+          name: 'antd',
+          priority: 20,
+          test: /[\\/]node_modules[\\/]antd[\\/]/
         },
         commons: {
           name: 'commons',

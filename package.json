@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/yandan66/skill-improve#readme",
   "dependencies": {
+    "antd": "^3.15.0",
+    "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
@@ -44,6 +46,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-import": "^1.11.0",
     "babel-plugin-lodash": "^3.3.4",
     "browserslist": "^4.4.2",
     "clean-webpack-plugin": "^2.0.0",
@@ -72,6 +75,8 @@
     "jest-fetch-mock": "^2.1.1",
     "jsdom": "^14.0.0",
     "koa-connect": "^2.0.1",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "lint-staged": "^8.1.5",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",

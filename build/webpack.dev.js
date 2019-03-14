@@ -13,7 +13,25 @@ module.exports = webpackMerge(basecConfig, {
   module: {
     rules: [
       {
+        test: /\.less$/,
+        exclude: /(node_modules)/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: true,
+              camelCase: true,
+              localIdentName: '[local]___[hash:base64:5]',
+            },
+          },
+          'less-loader',
+        ],
+      },
+      {
         test: /\.(css|scss)$/,
+        exclude: /(node_modules)/,
         use: [
           'style-loader',
           {
