@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames/bind'
 import { Button, Row, Form, Input, Checkbox, Icon } from 'antd'
 import styles from './styles.less'
@@ -8,14 +7,10 @@ const cx = classNames.bind(styles)
 const FormItem = Form.Item
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() { }
 
   render() {
-    console.log(this.props)
-    let { form: { getFieldDecorator } } = this.props
+    const { form: { getFieldDecorator } } = this.props
     return (
       <div className={cx('container')}>
         <div className={cx('content')}>
@@ -61,11 +56,4 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {
-  form: PropTypes.object,
-  dispatch: PropTypes.func,
-  loading: PropTypes.object,
-}
-
 export default Form.create({ name: 'normal_login' })(Login)
-

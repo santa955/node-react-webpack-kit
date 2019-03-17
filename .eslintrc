@@ -7,9 +7,13 @@
   ],
   "extends": [
     "airbnb",
-    "plugin:prettier/recommended",
     "prettier/react"
   ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
   "globals": {
     "React": true,
     "document": true,
@@ -21,9 +25,18 @@
   },
   "root": true,
   "rules": {
-    "quotes": [2, "single"],
-    "indent": [ "error",  2],
-    "semi": [2, "never"],
+    "quotes": [
+      2,
+      "single"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
     "react/prefer-stateless-function": "warn",
     "react/self-closing-comp": [
       "warn",
@@ -49,13 +62,9 @@
         }
       }
     ],
-    "jest/no-disabled-tests": "warn",
-    "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error",
-    "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error",
     "react/require-default-props": 0,
     "jsx-a11y/href-no-hash": "off",
+    "react/prop-types": 0,
     "jsx-a11y/anchor-is-valid": [
       "warn",
       {
@@ -116,12 +125,44 @@
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
-    "babel/object-curly-spacing": 0
-  },
-  "env": {
-    "es6": true,
-    "jest": true,
-    "browser": true,
-    "node": true
+    "babel/object-curly-spacing": 0,
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "ignore",
+        "objects": "ignore",
+        "imports": "ignore",
+        "exports": "ignore",
+        "functions": "ignore"
+      }
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "consistent": true
+      }
+    ],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all"
+      }
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
+    "eol-last": [
+      "error",
+      "never"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 200,
+        "tabWidth": 2
+      }
+    ],
+    "linebreak-style": 0,
   }
 }

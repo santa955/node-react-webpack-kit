@@ -10,4 +10,4 @@ module.exports = {
   fontsFolder: 'fonts',
   cssFolder: 'css',
   jsFolder: 'js',
-};
+}

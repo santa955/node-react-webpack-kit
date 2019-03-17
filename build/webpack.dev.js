@@ -1,10 +1,11 @@
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const commonPaths = require('./paths')
-const basecConfig = require('./webpack.base')
+const baseConfig = require('./webpack.base')
 
-module.exports = webpackMerge(basecConfig, {
+module.exports = webpackMerge(baseConfig, {
   mode: 'development',
+  devtool: 'eval-source-map',
   output: {
     filename: '[name].[hash].js',
     path: commonPaths.outputPath,
@@ -14,7 +15,7 @@ module.exports = webpackMerge(basecConfig, {
     rules: [
       {
         test: /\.less$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         use: [
           'style-loader',
           {
@@ -22,8 +23,7 @@ module.exports = webpackMerge(basecConfig, {
             options: {
               sourceMap: true,
               modules: true,
-              camelCase: true,
-              localIdentName: '[local]___[hash:base64:5]',
+              localIdentName: '[local]_[hash:base64:5]',
             },
           },
           'less-loader',
@@ -31,7 +31,7 @@ module.exports = webpackMerge(basecConfig, {
       },
       {
         test: /\.(css|scss)$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         use: [
           'style-loader',
           {
@@ -39,8 +39,7 @@ module.exports = webpackMerge(basecConfig, {
             options: {
               sourceMap: true,
               modules: true,
-              camelCase: true,
-              localIdentName: '[local]___[hash:base64:5]',
+              localIdentName: '[local_[hash:base64:5]',
             },
           },
           'sass-loader',
@@ -52,9 +51,22 @@ module.exports = webpackMerge(basecConfig, {
     contentBase: commonPaths.outputPath,
     compress: true,
     hot: true,
+    host: '127.0.0.1',
+    useLocalIp: true,
+    index: 'index.html',
+    open: false,
+    overlay: {
+      warnings: true,
+      errors: true
+    },
+    // 解决刷新路由404 https://github.com/facebook/create-react-app/issues/387
+    // https://zhuanlan.zhihu.com/p/32441060
+    historyApiFallback: {
+      disableDotRule: true,
+    },
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(['../dist']),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': 'development'
     }),
