@@ -6,6 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const BabelMinifyPlugin = require('babel-minify-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 const path = require('path')
 const baseConfig = require('./webpack.base')
 const commonPaths = require('./paths')
@@ -25,6 +26,7 @@ module.exports = webpackMerge(baseConfig, {
     publicPath: './'
   },
   module: {
+    noParse: /\.min\.js/,
     rules: [
       {
         test: /\.less$/,
@@ -38,6 +40,24 @@ module.exports = webpackMerge(baseConfig, {
               modules: true,
               localIdentName: '[local]_[hash:base64:5]',
             },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  remove: false,
+                  flexbox: 'no-2009',
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9',
+                  ]
+                })
+              ]
+            }
           },
           'less-loader',
         ],
@@ -54,6 +74,24 @@ module.exports = webpackMerge(baseConfig, {
               modules: true,
               localIdentName: '[local]_[hash:base64:5]',
             },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: (loader) => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  remove: false,
+                  flexbox: 'no-2009',
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9',
+                  ]
+                })
+              ]
+            }
           },
           'sass-loader',
         ],

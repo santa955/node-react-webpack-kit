@@ -12,6 +12,7 @@ module.exports = webpackMerge(baseConfig, {
     chunkFilename: '[name].[chunkhash].js',
   },
   module: {
+    noParse: /\.min\.js/,
     rules: [
       {
         test: /\.less$/,
