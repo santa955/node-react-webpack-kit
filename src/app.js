@@ -1,14 +1,22 @@
-import ReactDOM from 'react-dom'
-import React from 'react'
-import Loadable from 'react-loadable'
+import express from 'express'
+import bodyParser from 'body-parser'
+import morgan from 'morgan'
+import path from 'path'
+import cookieParser from 'cookie-parser'
 
+const app = express()
+const PORT = process.env.PORT || 3008
 
-const LogIn = Loadable({
-  loader: () => import('./pages/login'),
-  loading: () => null,
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(morgan('dev'))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, '../public')))
+
+app.get('/', (req, res) => {
+  res.send('Invalid endpoint!')
 })
 
-ReactDOM.render(
-  <LogIn />,
-  document.getElementById('root')
-)
+app.listen(PORT, () => {
+  console.info('server started - ', PORT)
+})
