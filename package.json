@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "webpack-dev-server --color --hot --config build/webpack.dev.js",
+    "server": "babel-node server.js",
     "build:analyze": "cross-env BUNDLE_ANALYZE=true webpack --config build/webpack.prod.js",
     "build": "webpack --config build/webpack.prod.js"
   },
@@ -22,6 +23,7 @@
   "dependencies": {
     "antd": "^3.15.0",
     "classnames": "^2.2.6",
+    "express": "^4.16.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-decorators": "^7.3.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
