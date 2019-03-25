@@ -41,7 +41,7 @@ class Login extends React.Component {
                 {getFieldDecorator('remember', { valuePropName: 'checked', initialValue: true })(
                   <Checkbox>自动登录</Checkbox>
                 )}
-                <a className='login-form-forgot' href='' style={{ float: 'right' }}>忘记密码</a>
+                <a className='login-form-forgot' href='javascript:;' style={{ float: 'right' }}>忘记密码</a>
               </FormItem>
               <Row><Button className={cx('btn-submit')} size='large' type='primary' onClick={this.handleOk} loading={false}>登&nbsp;录</Button></Row>
 

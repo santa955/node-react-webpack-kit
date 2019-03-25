@@ -1,6 +1,5 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const commonPaths = require('./paths')
 
@@ -16,18 +15,14 @@ module.exports = {
         loader: 'eslint-loader',
         exclude: /node_modules/,
         options: {
-          emitWarning: process.env.NODE_ENV !== 'production',
+          // emitWarning: process.env.NODE_ENV !== 'production',
+          emitWarning: false
         },
       },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-        include: [/node_modules/]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -55,16 +50,18 @@ module.exports = {
   },
 
   resolve: {
-    modules: ['src', 'node_modules'],
-    extensions: ['.js', '.jsx', '.css', '.scss', '.less'],
+    extensions: ['.js', '.jsx'],
+    alias: {}
   },
   plugins: [
     new ProgressBarPlugin(),
-    new HtmlWebpackPlugin({
-      template: commonPaths.templatePath,
-    }),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'async',
-    })
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
+  // 定义非直接引用依赖
+  // 定义第三方直接用Script引入而不需要打包的类库
+  // 使用方式即为 var $ = require("jquery")
+  externals: {
+    window: 'window',
+    jquery: '$'
+  }
 }

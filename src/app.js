@@ -2,13 +2,17 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import Loadable from 'react-loadable'
 
+// const LogIn = Loadable({
+//   loader: () => import(/* webpackChunkName: 'login' */'./pages/login'),
+//   loading: () => null,
+// })
 
-const LogIn = Loadable({
-  loader: () => import('./pages/login'),
+const Home = Loadable({
+  loader: () => import(/* webpackChunkName: 'home' */'./pages/home'),
   loading: () => null,
 })
 
 ReactDOM.render(
-  <LogIn />,
+  <Home />,
   document.getElementById('root')
 )
