@@ -28,6 +28,26 @@ const moduleCSSLoader = {
   }
 }
 
+const modulePostCssLoader = {
+  loader: 'postcss-loader',
+  options: {
+    ident: 'postcss',
+    plugins: () => [
+      require('postcss-flexbugs-fixes'),
+      autoprefixer({
+        remove: false,
+        flexbox: 'no-2009',
+        browsers: [
+          '>1%',
+          'last 4 versions',
+          'Firefox ESR',
+          'not ie < 9',
+        ],
+      }),
+    ],
+  },
+}
+
 module.exports = webpackMerge(baseConfig, {
   mode: 'production',
   output: {
@@ -37,7 +57,7 @@ module.exports = webpackMerge(baseConfig, {
     publicPath: './'
   },
   module: {
-    noParse: /\.min\.js/,
+    // noParse: /\.min\.js/,
     rules: [
       {
         test: /\.css$/,
@@ -49,27 +69,9 @@ module.exports = webpackMerge(baseConfig, {
         use: [
           MiniCssExtractPlugin.loader,
           moduleCSSLoader,
+          modulePostCssLoader,
           {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              ident: 'postcss',
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  remove: false,
-                  flexbox: 'no-2009',
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9',
-                  ],
-                }),
-              ],
-            },
-          },
-          {
-            loader: require.resolve('less-loader'),
+            loader: 'less-loader',
             options: {
               javascriptEnabled: true
             }
@@ -77,11 +79,20 @@ module.exports = webpackMerge(baseConfig, {
         ]
       },
       {
+        test: /\.styl$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          moduleCSSLoader,
+          modulePostCssLoader,
+          'stylus-loader'
+        ]
+      },
+      {
         test: /\.(scss|sass)$/,
         use: [
           MiniCssExtractPlugin.loader,
           moduleCSSLoader,
-          'postcss-loader',
+          modulePostCssLoader,
           'sass-loader'
         ]
       }

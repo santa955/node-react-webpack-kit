@@ -46,6 +46,10 @@ module.exports = webpackMerge(baseConfig, {
         ]
       },
       {
+        test: /\.styl$/,
+        use: ['style-loader', moduleCSSLoader, 'stylus-loader']
+      },
+      {
         test: /\.(scss|sass)$/,
         use: ['style-loader', moduleCSSLoader, 'sass-loader']
       }
