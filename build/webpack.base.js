@@ -9,16 +9,16 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-        options: {
-          // emitWarning: process.env.NODE_ENV !== 'production',
-          emitWarning: false
-        },
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.(js|jsx)$/,
+      //   loader: 'eslint-loader',
+      //   exclude: /node_modules/,
+      //   options: {
+      //     // emitWarning: process.env.NODE_ENV !== 'production',
+      //     emitWarning: false
+      //   },
+      // },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
