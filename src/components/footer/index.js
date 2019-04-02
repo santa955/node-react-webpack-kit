@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames/bind'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import styles from './styles.styl'
 
 const cx = classNames.bind(styles)

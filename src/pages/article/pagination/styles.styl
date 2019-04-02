@@ -1,0 +1,26 @@
+.pager-wrapper
+  position relative
+  margin 40px 0
+
+  &:before
+    content ''
+    position absolute
+    display block
+    width 320px
+    height 0
+    border-top 1px solid #aaa
+
+  .pagers
+    position relative
+    display flex
+    justify-content flex-start
+    align-items center
+    padding 30px 0
+
+    &>a
+      display block
+      padding 0 10px
+      font-size 14px
+      text-decoration none
+      user-select none
+      text-align center
