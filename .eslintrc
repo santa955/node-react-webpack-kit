@@ -68,7 +68,7 @@
       "warn",
       {
         "aspects": [
-          "invalidHref"
+          "noHref"
         ]
       }
     ],
@@ -163,5 +163,6 @@
       }
     ],
     "linebreak-style": 0,
+    "no-script-url": 0
   }
 }

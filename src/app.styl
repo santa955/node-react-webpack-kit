@@ -1,0 +1,32 @@
+$vw_fontsize = 20px
+$vw_design = 375px
+
+html
+  font-size $vw_fontsize
+
+  @media screen and (min-width: 400px)
+    font-size (400px * $vw_fontsize / $vw_design)
+
+  @media screen and (min-width: 414PX)
+    font-size (414px * $vw_fontsize / $vw_design)
+
+  @media screen and (min-width: 480PX)
+    font-size (480px * $vw_fontsize / $vw_design)
+
+  @media screen and (min-width: 768PX)
+    font-size (768px * $vw_fontsize / $vw_design)
+
+html
+body
+  margin 0 auto
+  max-width 768px
+  min-width 320px
+
+body
+  color #494949
+  font 14px 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif
+  min-height 100vh
+  line-height 1.5
+  background #f9f9f9
+  overflow-x hidden
+  overflow-y auto

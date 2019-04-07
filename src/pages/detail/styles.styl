@@ -1,0 +1,171 @@
+.header
+  display flex
+  align-items flex-start
+  padding 15px
+  width 100%
+  background #fff
+
+  .cover
+    width 80px
+    height auto
+    border-radius 4px
+
+  .info
+    margin-left 15px
+    color #aaa
+    font-size 12px
+    flex 1
+    font-weight 400
+
+  .title
+    color #494949
+    font-size 20px
+    line-height 28px
+    font-weight 600
+
+  .sub-title
+    margin-top 5px
+    color #494949
+    font-size 12px
+    font-weight 600
+    line-height 1.2
+
+  .meta
+    margin-top 8px
+
+  .statistics
+    margin-top 8px
+    color #494949
+    font-size 13px
+    font-weight 600
+
+.main
+  // margin-top 15px
+
+.movie-score
+  padding 20px 15px
+  background #fff
+
+  .star
+    display inline-block
+    margin-right 3px
+    width 6px
+    height 6px
+    background url('//pic.superbed.cn/item/5ca8cdcd3a213b0417c751de')
+    background-size cover
+    background-size contain
+    background-repeat no-repeat
+
+    &.star-half
+      background-image url('//pic.superbed.cn/item/5ca8cdcd3a213b0417c751e3')
+
+  .score-main
+    display flex
+
+  .score
+    width 150px
+    text-align center
+
+    &>span
+      display block
+
+    .score-txt
+      font-size 28px
+      line-height 1.3
+      font-weight 600
+
+    .star
+      width 10px
+      height 10px
+
+    .star-count
+      font-size 12px
+
+  .star-type
+    text-align right
+    line-height 1
+
+    .star-bar
+      position relative
+      display inline-block
+      margin-left 5px
+      width 120px
+      height 5px
+      background #eee
+      border-radius 3px
+      overflow hidden
+
+      .bar-active
+        display block
+        width 35%
+        height 100%
+        background #ffb712
+        border-radius 3px
+
+.movie-summary
+  margin-top 15px
+  padding 15px
+  background #fff
+
+  .summary
+    display -webkit-box
+    margin-top 5px
+    overflow hidden
+    -webkit-box-orient vertical
+    -webkit-line-clamp 3
+
+.movie-actors
+  padding 15px
+  padding-top 0
+  background #fff
+
+  .actors
+    margin-top 10px
+    overflow-x auto
+    white-space nowrap
+
+  .actor
+    display inline-block
+    margin-left 5px
+
+    &:first-child
+      margin-left 0
+
+  .actor-avatar
+    position relative
+    width 80px
+    height 113px
+    background-color #aaa
+    border-radius 4px
+    overflow hidden
+
+    img
+      width 100%
+      height 100%
+      object-fit cover
+
+    span
+      position absolute
+      display block
+      top 5px
+      left -5px
+      padding 2px 5px
+      color #fff
+      font-size 12px
+      transform scale(.8)
+      background #ffb712
+
+  p
+    display -webkit-box
+    margin-top 5px
+    color #aaa
+    font-size 12px
+    line-height 1
+    overflow hidden
+    -webkit-box-orient vertical
+    -webkit-line-clamp 2
+
+.movie-comments
+  margin-top 15px
+  padding 15px
+  background #fff
