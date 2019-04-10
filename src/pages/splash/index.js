@@ -11,9 +11,7 @@ export default class Splash extends React.PureComponent {
     return (
       <div className={cx('splash')}>
         <div className={cx('content')}>
-          {/* <span>好电影</span>
-          <span>好时光</span> */}
-          <Link to='/movies/1291572' className={cx('button')}>查看详情</Link>
+          <a href='/movies/1291572' className={cx('button')}>查看详情</a>
         </div>
       </div>
     )

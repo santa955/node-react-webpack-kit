@@ -22,7 +22,7 @@ const Detail = Loadable({
 })
 
 ReactDOM.render(
-  <div className='wrapper'>
+  <React.Fragment>
     <Helmet>
       <title>好时光 - 有好电影</title>
     </Helmet>
@@ -31,7 +31,7 @@ ReactDOM.render(
       <Route exact path='/movie/:id' component={Detail} />
       <Route exact path='/' component={Splash} />
     </Router>
-  </div>,
+  </React.Fragment>,
   document.getElementById('root')
 )
 
