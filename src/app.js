@@ -13,6 +13,11 @@ app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../public')))
 
+app.get('/api', (req, res) => {
+  res.setHeader('Cache-Control', 'max-age=100')
+  res.json({ 'message': '666' })
+})
+
 app.get('/', (req, res) => {
   res.send('Invalid endpoint!')
 })
