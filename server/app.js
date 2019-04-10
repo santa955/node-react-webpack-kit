@@ -22,15 +22,13 @@ app.use(express.static(path.join(__dirname, '../public')))
 app.use(webpackHotMiddleware(compiler))
 app.use(webpackDevMiddleware(compiler, {
   // public path should be the same with webpack config
-  // contentBase: path.resolve(__dirname, '../', 'dist'),
   publicPath: config.output.publicPath,
-  // noInfo: true,
-  historyApiFallback: true,
-  hot: true
+  noInfo: true,
+  historyApiFallback: true
 }))
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 })
 
 app.listen(PORT, () => {

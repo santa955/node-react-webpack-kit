@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const pxtorem = require('postcss-pxtorem')
 const commonPaths = require('./paths')
 const baseConfig = require('./webpack.base')
@@ -80,9 +81,8 @@ module.exports = webpackMerge(baseConfig, {
     }),
     new HtmlWebpackPlugin({
       template: commonPaths.templatePath,
-      appMountIds: ['app'],
       inject: true,
-      mobile: true,
+      alwaysWriteToDisk: true,
       minify: {
         html5: true,
         useShortDoctype: true,
@@ -96,6 +96,7 @@ module.exports = webpackMerge(baseConfig, {
         removeStyleLinkTypeAttributes: true
       },
     }),
+    new HtmlWebpackHarddiskPlugin(),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'async',
     })
