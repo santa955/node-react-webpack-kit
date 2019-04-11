@@ -16,7 +16,7 @@ import API from './api'
 
 const app = express()
 const PORT = process.env.PORT || 3008
-// const compiler = webpack(config)
+const compiler = webpack(config)
 const logDir = path.join(__dirname, '../log')
 
 // 日志按时间分割流
@@ -35,20 +35,20 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../public')))
 
-// app.use(webpackHotMiddleware(compiler))
-// app.use(webpackDevMiddleware(compiler, {
-//   // public path should be the same with webpack config
-//   publicPath: config.output.publicPath,
-//   noInfo: true,
-//   historyApiFallback: true
-// }))
+app.use(webpackHotMiddleware(compiler))
+app.use(webpackDevMiddleware(compiler, {
+  // public path should be the same with webpack config
+  publicPath: config.output.publicPath,
+  noInfo: true,
+  historyApiFallback: true
+}))
 
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../dist/index.html'));
-// })
 app.use('/api', API)
-// app.use(middleware404())
-// app.use(middlewareError())
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+})
+app.use(middleware404())
+app.use(middlewareError())
 
 app.listen(PORT, () => {
   console.log(

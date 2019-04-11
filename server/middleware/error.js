@@ -1,7 +1,10 @@
 const Error505 = () => {
   return (err, req, res, next) => {
-    res.status(err.status || 500)
-    res.render('error')
+    res.json({
+      status: -500502,
+      message: '内部错误',
+      data: null
+    })
   }
 }
 
