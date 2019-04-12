@@ -9,7 +9,10 @@ const cx = classNames.bind(styles)
 export default class Detail extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { movie: {} }
+    this.state = {
+      movie: {},
+      comments: {}
+    }
   }
   componentDidMount() {
     this.onLoadData()
@@ -18,15 +21,18 @@ export default class Detail extends React.Component {
   onLoadData = async () => {
     let { match: { params: { id } = {} } = {} } = this.props
     let result = await get(`/api/movie/${id}`)
-    let { data = {} } = result
-    this.setState({ movie: data })
+    let comments = await get(`/api/movie/${id}/comments`)
+    let { data: movie = {} } = result
+    let { data: movieComments = [] } = comments
+    this.setState({ movie, comments: movieComments })
   }
 
   render() {
-    let { movie = {} } = this.state
+    let { movie = {}, comments: { comments: movieComments = [] } = {} } = this.state
     let { title, original_title, images: { small } = {}, genres = [], countries = [], year,
       wish_count = 0, reviews_count = 0, rating = {}, ratings_count = 0, summary,
       directors = [], casts = [] } = movie
+
     return (
       <section className={cx('detial-wrapper')}>
         <header className={cx('header')}>
@@ -109,11 +115,11 @@ export default class Detail extends React.Component {
             </div>
           </div>
           <div className={cx('movie-summary')}>
-            <h3>简介</h3>
+            <h3 className={cx('module-title')}>简介</h3>
             <p className={cx('summary')}>{summary}©豆瓣</p>
           </div>
           <div className={cx('movie-actors')}>
-            <h3>演员</h3>
+            <h3 className={cx('module-title')}>演员</h3>
             <ul className={cx('actors')}>
               {directors.map(director => {
                 return (
@@ -137,12 +143,9 @@ export default class Detail extends React.Component {
             </ul>
           </div>
           <div className={cx('movie-comments')}>
-            <h3>精彩评论</h3>
+            <h3 className={cx('module-title')}>精彩评论</h3>
             <ul className={cx('comments')}>
-              <Comment></Comment>
-              <Comment></Comment>
-              <Comment></Comment>
-              <Comment></Comment>
+              {movieComments.map(comment => <Comment key={comment.id} {...comment} />)}
             </ul>
           </div>
         </main>
