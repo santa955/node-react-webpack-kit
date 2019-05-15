@@ -133,7 +133,7 @@ export default class Detail extends React.Component {
               })}
               {casts.map(cast => {
                 return (
-                  <li className={cx('actor')}>
+                  <li key={cast.id} className={cx('actor')}>
                     <div className={cx('actor-avatar')}>
                       <img src={cast.avatars.small} alt='' />
                     </div>
