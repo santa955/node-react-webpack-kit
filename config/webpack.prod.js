@@ -8,11 +8,13 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 const baseConfig = require('./webpack.base')
 const commonPaths = require('./paths')
 
+const ASSETS_PUBLIC_PATH = '/'
 const plugins = []
 const isAnalyze = typeof process.env.BUNDLE_ANALYZE !== 'undefined'
 
@@ -51,10 +53,10 @@ const modulePostCssLoader = {
 module.exports = webpackMerge(baseConfig, {
   mode: 'production',
   output: {
-    filename: `[name].[hash].js`,
+    filename: `${commonPaths.jsFolder}/[name].[hash].js`,
     path: commonPaths.outputPath,
-    chunkFilename: '[name].[chunkhash].js',
-    publicPath: './'
+    chunkFilename: `${commonPaths.jsFolder}/[name].[chunkhash].js`,
+    publicPath: ASSETS_PUBLIC_PATH
   },
   module: {
     // noParse: /\.min\.js/,
@@ -112,6 +114,7 @@ module.exports = webpackMerge(baseConfig, {
     new webpack.DefinePlugin({
       'process.env': 'production'
     }),
+    new ManifestPlugin()
   ],
   optimization: {
     minimize: true,

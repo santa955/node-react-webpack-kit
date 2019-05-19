@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack-dev-server --color --config build/webpack.dev.js",
+    "dev": "webpack-dev-server --color --config config/webpack.dev.js",
     "server": "nodemon -w server --exec \"babel-node ./server/app.js\"",
     "server:api": "babel-node ./server/app.js",
     "build:analyze": "cross-env BUNDLE_ANALYZE=true webpack --config build/webpack.prod.js",
-    "build": "webpack --config build/webpack.prod.js"
+    "build": "webpack --config config/webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -107,6 +107,7 @@
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",
     "webpack-hot-middleware": "^2.24.3",
+    "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.1",
     "webpack-node-externals": "^1.7.2"
   }

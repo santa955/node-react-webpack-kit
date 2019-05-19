@@ -7,17 +7,17 @@ import './reset.styl'
 import './app.styl'
 
 const Splash = Loadable({
-  loader: () => import('./pages/splash'),
+  loader: () => import(/* webpackChunkName: "splash" */ './pages/splash'),
   loading: () => null
 })
 
 const List = Loadable({
-  loader: () => import('./pages/list'),
+  loader: () => import(/* webpackChunkName: "list" */ './pages/list'),
   loading: () => null
 })
 
 const Detail = Loadable({
-  loader: () => import('./pages/detail'),
+  loader: () => import(/* webpackChunkName: "detail" */ './pages/detail'),
   loading: () => null
 })
 
