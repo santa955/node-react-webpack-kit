@@ -1,11 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import classNames from 'classnames/bind'
-import { get } from '../../utils/net-wrok'
+import { getMovieInfo, getMovieComments } from '../../redux/action/detail'
 import Comment from './comment'
 import styles from './styles.styl'
 
 const cx = classNames.bind(styles)
 
+@connect(state => {
+  return {
+    movieInfo: state.detail.movieInfo,
+    comments: state.detail.comments
+  }
+})
 export default class Detail extends React.Component {
   constructor(props) {
     super(props)
@@ -20,15 +27,12 @@ export default class Detail extends React.Component {
 
   onLoadData = async () => {
     let { match: { params: { id } = {} } = {} } = this.props
-    let result = await get(`/api/movie/${id}`)
-    let comments = await get(`/api/movie/${id}/comments`)
-    let { data: movie = {} } = result
-    let { data: movieComments = [] } = comments
-    this.setState({ movie, comments: movieComments })
+    this.props.dispatch(getMovieInfo(id))
+    this.props.dispatch(getMovieComments(id))
   }
 
   render() {
-    let { movie = {}, comments: { comments: movieComments = [] } = {} } = this.state
+    let { movieInfo: { info: movie }, comments: { comments: movieComments = [] } = {} } = this.props
     let { title, original_title, images: { small } = {}, genres = [], countries = [], year,
       wish_count = 0, reviews_count = 0, rating = {}, ratings_count = 0, summary,
       directors = [], casts = [] } = movie

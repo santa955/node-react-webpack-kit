@@ -1,8 +1,12 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import ReduxThunk from 'redux-thunk'
 import { Helmet } from 'react-helmet'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
+import rootReducer from './redux/reducer'
 import './reset.styl'
 import './app.styl'
 
@@ -21,8 +25,10 @@ const Detail = Loadable({
   loading: () => null
 })
 
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
+
 ReactDOM.render(
-  <React.Fragment>
+  <Provider store={store}>
     <Helmet>
       <title>好时光 - 有好电影</title>
     </Helmet>
@@ -31,7 +37,7 @@ ReactDOM.render(
       <Route exact path='/movie/:id' component={Detail} />
       <Route exact path='/' component={Splash} />
     </Router>
-  </React.Fragment>,
+  </Provider>,
   document.getElementById('root')
 )
 

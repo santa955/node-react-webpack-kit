@@ -14,7 +14,6 @@ const request = ({ url, data = {} }) => {
 
 
   if (Object.keys(rest).length) {
-    console.log('reset', rest)
     option.body = JSON.stringify(rest)
   }
 

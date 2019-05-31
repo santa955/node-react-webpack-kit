@@ -1,11 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import classNames from 'classnames/bind'
-import { get } from '../../utils/net-wrok'
+import { getList } from '../../redux/action/list'
 import Item from './item'
 import styles from './styles.styl'
 
 const cx = classNames.bind(styles)
 
+@connect(state => {
+  return {
+    movies: state.movies
+  }
+})
 export default class List extends React.Component {
   constructor(props) {
     super(props)
@@ -18,17 +24,16 @@ export default class List extends React.Component {
   }
 
   onLoadData = async () => {
-    let result = await get('/api/movies/theaters')
-    let { data: { subjects = [] } = {} } = result
-    this.setState({ movies: subjects })
+    this.props.dispatch(getList())
   }
 
   render() {
-    let { movies } = this.state
+    let { movies: { subjects } } = this.props
+
     return (
       <div className={cx('movies-wrapper')}>
         <ul className={cx('movies')}>
-          {movies.map(movie => <Item key={movie.id} info={movie} />)}
+          {subjects.map(movie => <Item key={movie.id} info={movie} />)}
         </ul>
       </div>
     )
