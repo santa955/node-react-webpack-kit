@@ -26,9 +26,9 @@ export default class Detail extends React.Component {
   }
 
   onLoadData = async () => {
-    let { match: { params: { id } = {} } = {} } = this.props
-    this.props.dispatch(getMovieInfo(id))
-    this.props.dispatch(getMovieComments(id))
+    let { dispatch, match: { params: { id } = {} } = {} } = this.props
+    dispatch(getMovieInfo(id))
+    dispatch(getMovieComments(id))
   }
 
   render() {
