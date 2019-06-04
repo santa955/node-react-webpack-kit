@@ -16,11 +16,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../dist')))
-// app.use(morgan('dev'))
+app.use(morgan('dev'))
 app.use('/api', API)
+
+console.log('dir', path.join(__dirname, '../dist/index.html'))
+
 app.get('*', (req, res) => {
   fs.readFile(
-    path.join(__dirname, '../src/index.html'),
+    path.join(root ,'./dist/index.html'),
     'utf8', (err, html) => {
       if (err) {
         console.error('Read error', err)

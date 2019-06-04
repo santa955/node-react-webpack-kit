@@ -9,6 +9,8 @@
     "server": "nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
     "server:api": "babel-node ./server/app.js",
     "build:analyze": "cross-env BUNDLE_ANALYZE=true webpack --config build/webpack.prod.js",
+    "build:client": "webpack --config config/webpack.dev.js",
+    "build:server": "webpack --config config/webpack.server.js",
     "build": "webpack --config config/webpack.prod.js"
   },
   "repository": {
@@ -93,6 +95,7 @@
     "lint-staged": "^8.1.5",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
+    "node-style-loader": "0.0.1-alpha",
     "nodemon": "^1.18.10",
     "npm-check-updates": "^3.0.8",
     "optimize-css-assets-webpack-plugin": "^5.0.1",

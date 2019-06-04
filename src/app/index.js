@@ -1,17 +1,13 @@
 import './reset.styl'
 import './app.styl'
-import ReactDOM from 'react-dom'
 import React from 'react'
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import ReduxThunk from 'redux-thunk'
 import { Helmet } from 'react-helmet'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
-import rootReducer from '../redux/reducer'
-import Test from '../test'
 
-export default Test
+// import Test from '../test'
+
+// export default Test
 
 const Splash = Loadable({
   loader: () => import(/* webpackChunkName: "splash" */ '../pages/splash'),
@@ -28,7 +24,17 @@ const Detail = Loadable({
   loading: () => null
 })
 
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
+const App = () => {
+  return (
+    <React.Fragment>
+      <Route exact path='/movies/:id' component={List} />
+      <Route exact path='/movie/:id' component={Detail} />
+      <Route exact path='/' component={Splash} />
+    </React.Fragment>
+  )
+}
+
+export default App
 
 // ReactDOM.render(
 //   <Provider store={store}>

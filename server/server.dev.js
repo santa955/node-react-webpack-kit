@@ -1,5 +1,3 @@
-import register from 'ignore-styles'
-import morgan from 'morgan'
 // import webpack from 'webpack'
 // import webpackDevMiddleware from 'webpack-dev-middleware'
 // import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -8,15 +6,7 @@ import app from './app'
 
 const PORT = process.env.PORT || 3009
 // const compiler = webpack(config)
-const extensions = ['.gif', '.jpeg', '.jpg', '.png', '.svg']
 
-register(register.DEFAULT_EXTENSIONS, (mod, filename) => {
-  if (!extensions.find(f => filename.endsWith(f))) {
-    return ignoreStyles.noOp()
-  }
-})
-
-app.use(morgan('dev'))
 // app.use(webpackHotMiddleware(compiler))
 // app.use(webpackDevMiddleware(compiler, {
 //   // public path should be the same with webpack config
