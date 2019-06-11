@@ -1,6 +1,8 @@
 import React from 'react'
 import Classnames from 'classnames/bind'
-import styles from './styles.styl'
+// import styles from './styles.styl'
+
+const styles = {}
 
 const cx = Classnames.bind(styles)
 

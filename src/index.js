@@ -7,9 +7,12 @@ import { Provider } from 'react-redux'
 import rootReducer from './redux/reducer'
 import App from './app'
 
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
+const initState = window.__PRELOADED_STATE__ || {}
+const store = createStore(rootReducer, initState, applyMiddleware(ReduxThunk))
 
-ReactDOM.hydrate(
+// ReactDOM.hydrate(<App />, document.getElementById('root'))
+
+ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <App />

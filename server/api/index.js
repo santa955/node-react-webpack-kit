@@ -1,5 +1,6 @@
-const express = require('express')
-const request = require('request')
+import express from 'express'
+import request from 'request'
+
 const router = express.Router()
 const API_URL = 'https://api.douban.com/v2/movie'
 
