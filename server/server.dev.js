@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser'
 import ignoreStyles from 'ignore-styles'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { StaticRouter } from 'react-router-dom'
+import { StaticRouter, matchPath } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import ReduxThunk from 'redux-thunk'
@@ -57,7 +57,6 @@ app.get('*', (req, res) => {
         if (err) console.log(err)
         const p = JSON.parse(body)
         const movieInfo = p.data
-        console.log(p.code)
         const initState = {
           detail: {
             movieInfo: {
@@ -68,7 +67,7 @@ app.get('*', (req, res) => {
         const store = createStore(rootReducer, initState, applyMiddleware(ReduxThunk))
         const content = renderToString(
           <Provider store={store}>
-            <StaticRouter location={req.url} context={{}}>
+            <StaticRouter location={req.originalUrl} context={{}}>
               <Client />
             </StaticRouter>
           </Provider>

@@ -1,16 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import { createStore, applyMiddleware } from 'redux'
-import ReduxThunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import rootReducer from './redux/reducer'
+import getStore from './redux/store'
 import App from './app'
 
-const initState = window.__PRELOADED_STATE__ || {}
-const store = createStore(rootReducer, initState, applyMiddleware(ReduxThunk))
-
 // ReactDOM.hydrate(<App />, document.getElementById('root'))
+
+const store = getStore()
 
 ReactDOM.render(
   <Provider store={store}>
