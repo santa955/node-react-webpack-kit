@@ -2,6 +2,7 @@ import express from 'express'
 import path from 'path'
 import fs from 'fs'
 import FileStreamRotator from 'file-stream-rotator'
+import Loadable from 'react-loadable'
 import morgan from 'morgan'
 import app from './app'
 
@@ -21,10 +22,12 @@ fs.existsSync(logDir) || fs.mkdirSync(logDir)
 app.use(morgan('combined', { stream: accessLogStream }))
 app.use(express.static(path.resolve(__dirname, './')))
 
-app.listen(PORT, () => {
-  console.log(
-    `Server listening on \x1b[42m\x1b[1mhttp://localhost:${PORT}\x1b[0m in \x1b[41m${
-    process.env.NODE_ENV || 'production'
-    }\x1b[0m 🌎...`
-  )
-})
+Loadable.preloadAll().then(() => {
+  app.listen(PORT, () => {
+    console.log(
+      `Server listening on \x1b[42m\x1b[1mhttp://localhost:${PORT}\x1b[0m in \x1b[41m${
+      process.env.NODE_ENV || 'production'
+      }\x1b[0m 🌎...`
+    )
+  })
+}, (err) => console.log('err', err))

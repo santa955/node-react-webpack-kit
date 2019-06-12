@@ -1,5 +1,6 @@
 import morgan from 'morgan'
 import ignoreStyles from 'ignore-styles'
+import Loadable from 'react-loadable'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -10,9 +11,10 @@ const PORT = process.env.PORT || 3008
 const compiler = webpack(config)
 
 ignoreStyles(ignoreStyles.DEFAULT_EXTENSIONS, (mod, filename) => {
-  if (!extensions.find(f => filename.endsWith(f))) {
-    return ignoreStyles.noOp()
-  }
+  console.log(filename)
+  // if (!extensions.find(f => filename.endsWith(f))) {
+  //   return ignoreStyles.noOp()
+  // }
 })
 
 app.use(morgan('dev'))
@@ -24,10 +26,12 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true
 }))
 
-app.listen(PORT, () => {
-  console.log(
-    `Server listening on \x1b[42m\x1b[1mhttp://localhost:${PORT}\x1b[0m in \x1b[41m${
-    process.env.NODE_ENV || 'development'
-    }\x1b[0m 🌎...`
-  )
-})
+Loadable.preloadAll().then(() => {
+  app.listen(PORT, () => {
+    console.log(
+      `Server listening on \x1b[42m\x1b[1mhttp://localhost:${PORT}\x1b[0m in \x1b[41m${
+      process.env.NODE_ENV || 'development'
+      }\x1b[0m 🌎...`
+    )
+  })
+}, (err) => console.log('err', err))

@@ -13,19 +13,13 @@
   "plugins": [
     "@babel/plugin-transform-runtime",
     "react-hot-loader/babel",
+    "dynamic-import-node",
+    "react-loadable/babel",
     // Stage 2 https://github.com/babel/babel/tree/master/packages/babel-preset-stage-2
     [
       "@babel/plugin-proposal-decorators",
       {
         "legacy": true
-      }
-    ],
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "libraryDirectory": "es",
-        "style": true
       }
     ],
     "@babel/plugin-proposal-function-sent",

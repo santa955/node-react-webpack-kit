@@ -1,6 +1,7 @@
 import request from 'request'
 
-const HOST = 'http://127.0.0.1:3009'
+const PORT = process.env.PORT || 3008
+const HOST = `http://127.0.0.1:${PORT}`
 
 export const get = ({ url }) => {
   console.log('API REQUEST URL: ', `${HOST}${url}`)

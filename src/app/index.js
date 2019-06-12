@@ -3,26 +3,27 @@ import './app.styl'
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
-import Splash from '../pages/splash'
-import List from '../pages/list'
-import Detail from '../pages/detail'
+// import Splash from '../pages/splash'
+// import List from '../pages/list'
+// import Detail from '../pages/detail'
 
-import Test from '../test'
+const Splash = Loadable({
+  loader: () => import(/* webpackChunkName: "splash" */ '../pages/splash'),
+  loading: () => null,
+  modules: ['splash']
+})
 
-// const Splash = Loadable({
-//   loader: () => import(/* webpackChunkName: "splash" */ '../pages/splash'),
-//   loading: () => null
-// })
+const List = Loadable({
+  loader: () => import(/* webpackChunkName: "list" */ '../pages/list'),
+  loading: () => null,
+  modules: ['list']
+})
 
-// const List = Loadable({
-//   loader: () => import(/* webpackChunkName: "list" */ '../pages/list'),
-//   loading: () => null
-// })
-
-// const Detail = Loadable({
-//   loader: () => import(/* webpackChunkName: "detail" */ '../pages/detail'),
-//   loading: () => null
-// })
+const Detail = Loadable({
+  loader: () => import(/* webpackChunkName: "detail" */ '../pages/detail'),
+  loading: () => null,
+  modules: ['detail']
+})
 
 const App = () => {
   return (
