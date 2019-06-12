@@ -25,6 +25,7 @@
   "homepage": "https://github.com/yandan66/skill-improve#readme",
   "dependencies": {
     "antd": "^3.15.0",
+    "babel-core": "^6.26.3",
     "classnames": "^2.2.6",
     "cookie-parser": "^1.4.4",
     "core-js": "^2.6.5",
@@ -61,7 +62,6 @@
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
     "autoprefixer": "^9.5.0",
-    "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
