@@ -4,14 +4,13 @@
   "description": "A complete front-end project to improve my personal vocational skills",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "webpack-dev-server --color --config config/webpack.dev.js",
-    "server": "nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
-    "server:api": "babel-node ./server/app.js",
+    "start": "npm run dev:client",
+    "dev:client": "webpack-dev-server --color --config config/webpack.dev.js",
+    "dev:server": "nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
     "build:analyze": "cross-env BUNDLE_ANALYZE=true webpack --config build/webpack.prod.js",
-    "build:client": "webpack --config config/webpack.dev.js",
+    "build:client": "webpack --config config/webpack.prod.js",
     "build:server": "webpack --config config/webpack.server.js",
-    "build": "webpack --config config/webpack.prod.js"
+    "production": "NODE_ENV=production node ./dist/server.js"
   },
   "repository": {
     "type": "git",

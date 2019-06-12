@@ -1,13 +1,16 @@
-// import express from 'express'
-// import path from 'path'
+import express from 'express'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import API from './api'
+import routers from './routers'
 
-// import bodyParser from 'body-parser'
-// import cookieParser from 'cookie-parser'
-// import morgan from 'morgan'
-// import React from 'react'
-// import { renderToString } from 'react-dom/server'
+const app = express()
 
-// import { injectHTML } from './utils'
-// // import Hello from '../src/app'
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
-// const app = express()
+app.use('/api', API)
+app.use(routers)
+
+export default app

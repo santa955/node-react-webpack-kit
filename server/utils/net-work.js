@@ -1,6 +1,6 @@
 import request from 'request'
 
-const HOST = 'http://127.0.0.1:3008'
+const HOST = 'http://127.0.0.1:3009'
 
 export const get = ({ url }) => {
   console.log('API REQUEST URL: ', `${HOST}${url}`)

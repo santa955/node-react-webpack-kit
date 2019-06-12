@@ -9,7 +9,7 @@ import ReduxThunk from 'redux-thunk'
 import Client from '../../src/app'
 import rootReducer from '../../src/redux/reducer'
 
-const root = path.resolve(__dirname, '../../')
+const root = process.env.NODE_ENV === 'production' ? path.resolve(__dirname, '../') : path.resolve(__dirname, '../../')
 const injectHTML = (data, { html, title, meta, body, scripts, state }) => {
   data = data.replace('<html>', `<html ${html}>`)
   // data = data.replace(/<title>.*?<\/title>/g, title)

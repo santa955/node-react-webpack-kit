@@ -15,6 +15,7 @@ const moduleCSSLoader = {
 }
 
 module.exports = webpackMerge(baseConfig, {
+  mode: 'production',
   entry: commonPath.serverEntryPath,
   output: {
     path: `${commonPath.outputPath}`,
@@ -24,6 +25,10 @@ module.exports = webpackMerge(baseConfig, {
   },
   target: 'node',
   externals: [nodeExternals()],
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
   module: {
     rules: [
       {
@@ -35,6 +40,5 @@ module.exports = webpackMerge(baseConfig, {
         ]
       }
     ]
-  },
-  plugins: []
+  }
 })

@@ -1,19 +1,11 @@
-import express from 'express'
-import path from 'path'
-import request from 'request'
-import fs from 'fs'
-import bodyParser from 'body-parser'
 import morgan from 'morgan'
-import cookieParser from 'cookie-parser'
 import ignoreStyles from 'ignore-styles'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
+import app from './app'
 import config from '../config/webpack.dev'
-import API from './api'
-import routers from './routers'
 
-const app = express()
 const PORT = process.env.PORT || 3008
 const compiler = webpack(config)
 
@@ -24,10 +16,6 @@ ignoreStyles(ignoreStyles.DEFAULT_EXTENSIONS, (mod, filename) => {
 })
 
 app.use(morgan('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cookieParser())
-
 app.use(webpackHotMiddleware(compiler))
 app.use(webpackDevMiddleware(compiler, {
   // public path should be the same with webpack config
@@ -35,9 +23,6 @@ app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   historyApiFallback: true
 }))
-
-app.use('/api', API)
-app.use(routers)
 
 app.listen(PORT, () => {
   console.log(
