@@ -2,28 +2,13 @@ import './reset.styl'
 import './app.styl'
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Loadable from 'react-loadable'
-// import Splash from '../pages/splash'
-// import List from '../pages/list'
-// import Detail from '../pages/detail'
+import Loadable from '@loadable/component'
 
-const Splash = Loadable({
-  loader: () => import(/* webpackChunkName: "splash" */ '../pages/splash'),
-  loading: () => null,
-  modules: ['splash']
-})
+const Splash = Loadable( /* #__LOADABLE__ */() => import(/* webpackChunkName: "splash" */ '../pages/splash'))
 
-const List = Loadable({
-  loader: () => import(/* webpackChunkName: "list" */ '../pages/list'),
-  loading: () => null,
-  modules: ['list']
-})
+const List = Loadable( /* #__LOADABLE__ */() => import(/* webpackChunkName: "list" */ '../pages/list'))
 
-const Detail = Loadable({
-  loader: () => import(/* webpackChunkName: "detail" */ '../pages/detail'),
-  loading: () => null,
-  modules: ['detail']
-})
+const Detail = Loadable( /* #__LOADABLE__ */() => import(/* webpackChunkName: "detail" */ '../pages/detail'))
 
 const App = () => {
   return (

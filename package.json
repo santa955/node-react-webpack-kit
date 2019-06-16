@@ -6,10 +6,11 @@
   "scripts": {
     "start": "npm run dev:client",
     "dev:client": "webpack-dev-server --color --config config/webpack.dev.js",
-    "dev:server": "cross-env BABEL_ENV=node nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
+    "dev:ssr": "cross-env BABEL_ENV=node  SERVER_SSR=true nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
+    "dev:api": "cross-env BABEL_ENV=node  nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
     "build:analyze": "cross-env BUNDLE_ANALYZE=true webpack --config build/webpack.prod.js",
     "build:client": "webpack --config config/webpack.prod.js",
-    "build:server": "webpack --config config/webpack.server.js",
+    "build:ssr": "webpack --config config/webpack.server.js",
     "production": "cross-env PORT=3008 NODE_ENV=production node ./dist/server.js"
   },
   "repository": {
@@ -23,11 +24,14 @@
   },
   "homepage": "https://github.com/yandan66/skill-improve#readme",
   "dependencies": {
+    "@loadable/component": "^5.10.1",
+    "@loadable/server": "^5.9.0",
     "antd": "^3.15.0",
     "babel-core": "^6.26.3",
     "classnames": "^2.2.6",
     "cookie-parser": "^1.4.4",
     "core-js": "^2.6.5",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-static-gzip": "^1.1.3",
     "file-stream-rotator": "^0.4.1",
@@ -60,6 +64,8 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
+    "@loadable/babel-plugin": "^5.10.0",
+    "@loadable/webpack-plugin": "^5.7.1",
     "autoprefixer": "^9.5.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",

@@ -1,3 +1,4 @@
+const HOST = 'http://127.0.0.1:3008'
 const request = ({ url, data = {} }) => {
   let { method = 'GET', header = {}, ...rest } = data
   let headers = { ...header, 'content-type': 'application/json' }
@@ -12,6 +13,7 @@ const request = ({ url, data = {} }) => {
     referrer: 'no-referrer',
   }
 
+  url = `${HOST}${url}`
 
   if (Object.keys(rest).length) {
     option.body = JSON.stringify(rest)

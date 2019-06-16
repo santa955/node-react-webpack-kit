@@ -10,9 +10,8 @@ import Loadable from 'react-loadable'
 import { collectInitial, collectContext } from 'node-style-loader/collect'
 import Client from '../../src/app'
 import rootReducer from '../../src/redux/reducer'
-import manifest from '../../dist/manifest.json'
+// import manifest from '../../dist/manifest.json'
 
-// const criticalStyles = process.env.NODE_ENV === 'production' ? collectInitial() : ''
 const root = process.env.NODE_ENV === 'production' ? path.resolve(__dirname, '../') : path.resolve(__dirname, '../../')
 const injectHTML = (data, { html, title, meta, criticalStyles, body, scripts, state }) => {
   data = data.replace('<html>', `<html ${html}>`)
@@ -44,7 +43,7 @@ export default (req, res, initState) => {
 
         const modules = []
         const store = createStore(rootReducer, initState, applyMiddleware(ReduxThunk))
-
+        const manifest = path.join(root,  './dist/manifest.json')
         const extraChunks = extractAssets(manifest, modules)
           .map(c => `<script type="text/javascript" src="/${c.replace(/^\//, '')}"></script>`)
 
