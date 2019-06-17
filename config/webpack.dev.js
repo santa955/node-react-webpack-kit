@@ -3,11 +3,14 @@ const webpackMerge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const LoadablePlugin = require('@loadable/webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const pxtorem = require('postcss-pxtorem')
 const commonPaths = require('./paths')
 const baseConfig = require('./webpack.base')
 
 const ASSETS_PUBLIC_PATH = '/'
+const use_ssr = process.env.SERVER_SSR || false
 const moduleCSSLoader = {
   loader: 'css-loader',
   options: {
@@ -38,8 +41,8 @@ module.exports = webpackMerge(baseConfig, {
   devtool: 'eval-source-map',
   entry: { hot: 'webpack-hot-middleware/client' },
   output: {
-    path: commonPaths.outputPath,
-    publicPath: ASSETS_PUBLIC_PATH,
+    path: `${commonPaths.outputPath}/web`,
+    publicPath: `/web`,
     filename: '[name].[hash].js',
     sourceMapFilename: '[name].map',
     chunkFilename: '[name].[chunkhash].js'
@@ -55,7 +58,7 @@ module.exports = webpackMerge(baseConfig, {
       {
         test: /\.less$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           moduleCSSLoader,
           modulePostCssLoader,
           {
@@ -77,8 +80,15 @@ module.exports = webpackMerge(baseConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env': 'development'
+      'process.env': {
+        USE_SSR: JSON.stringify(use_ssr)
+      }
     }),
+    new LoadablePlugin(),
+    // new MiniCssExtractPlugin({
+    //   // filename: `${commonPaths.cssFolder}/[name].[hash].css`,
+    //   // chunkFilename: `${commonPaths.cssFolder}/[name].[chunkhash].css`,
+    // }),
     new HtmlWebpackPlugin({
       template: commonPaths.templatePath,
       inject: true,
