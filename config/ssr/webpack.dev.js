@@ -1,10 +1,18 @@
+const path = require('path')
+const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
-const webpackMerge = require('webpack-merge')
 const LoadablePlugin = require('@loadable/webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const pxtorem = require('postcss-pxtorem')
-const baseConfig = require('./webpack.base')
-const commonPath = require('./paths')
+
+const commonPath = require('../paths')
+
+const getEntry = target => {
+  return target === 'node'
+    ? commonPath.serverEntryPath
+    : commonPath.entryPath
+}
 
 const moduleCSSLoader = {
   loader: 'css-loader',
@@ -30,19 +38,21 @@ const modulePostCssLoader = {
     ],
   },
 }
-module.exports = webpackMerge(baseConfig, {
+
+const getConfig = target => ({
+  name: target,
   mode: 'development',
-  entry: { servers: commonPath.serverEntryPath },
-  output: {
-    path: `${commonPath.outputPath}/node`,
-    publicPath: `/node`,
-    filename: '[name].[hash].js',
-    sourceMapFilename: '[name].map',
-    chunkFilename: '[name].[chunkhash].js',
-    libraryTarget: 'commonjs2',
+  target,
+  entry: {
+    app: getEntry(target)
   },
-  target: 'node',
-  externals: ['@loadable/component', nodeExternals()],
+  output: {
+    path: path.join(commonPath.outputPath, target),
+    filename: '[name].[hash].js',
+    chunkFilename: '[name].[chunkhash].js',
+    publicPath: `/${target}`,
+    libraryTarget: target === 'node' ? 'commonjs2' : undefined,
+  },
   node: {
     __dirname: false,
     __filename: false,
@@ -50,9 +60,14 @@ module.exports = webpackMerge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        test: /\.js?$/,
         exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            caller: { target },
+          },
+        },
       },
       {
         test: /\.styl$/,
@@ -61,12 +76,25 @@ module.exports = webpackMerge(baseConfig, {
           moduleCSSLoader,
           modulePostCssLoader,
           'stylus-loader'
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
+  externals: target === 'node' ? ['@loadable/component', nodeExternals()] : undefined,
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(),
     new LoadablePlugin(),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash].css',
+      chunkFilename: '[name].[chunkhash].css',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        USE_SSR: JSON.stringify(true)
+      }
+    })
   ]
 })
+
+export default [getConfig('web'), getConfig('node')]

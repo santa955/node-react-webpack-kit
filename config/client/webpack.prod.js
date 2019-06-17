@@ -12,7 +12,7 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 const baseConfig = require('./webpack.base')
-const commonPaths = require('./paths')
+const commonPaths = require('../paths')
 
 const ASSETS_PUBLIC_PATH = '/'
 const plugins = []
@@ -112,7 +112,9 @@ module.exports = webpackMerge(baseConfig, {
       template: commonPaths.templatePath,
     }),
     new webpack.DefinePlugin({
-      'process.env': 'production'
+      'process.env': {
+        USE_SSR: JSON.stringify(false)
+      }
     }),
     new ManifestPlugin()
   ],

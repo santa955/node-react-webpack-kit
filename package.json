@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev:client",
-    "dev:client": "webpack-dev-server --color --config config/webpack.dev.js",
-    "dev:ssr": "cross-env BABEL_ENV=node  SERVER_SSR=true nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
-    "dev:api": "cross-env BABEL_ENV=node  nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
-    "build:analyze": "cross-env BUNDLE_ANALYZE=true webpack --config build/webpack.prod.js",
-    "build:client": "webpack --config config/webpack.prod.js",
-    "build:ssr": "webpack --config config/webpack.server.js",
-    "production": "cross-env PORT=3008 NODE_ENV=production node ./dist/server.js"
+    "dev:client": "webpack-dev-server --color --config config/client/webpack.dev.js",
+    "dev:ssr": "cross-env SERVER_SSR=true nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
+    "dev:api": "cross-env nodemon -w server --exec \"babel-node ./server/server.dev.js\"",
+    "build:analyze": "cross-env BUNDLE_ANALYZE=true webpack --config build/client/webpack.prod.js",
+    "build:client": "webpack --config config/client/webpack.prod.js",
+    "build:ssr": "webpack --config config/ssr/webpack.prod.js",
+    "prod:client": "cross-env PORT=3008 NODE_ENV=production babel-node ./server/server.prod.js",
+    "prod:ssr": "cross-env PORT=3009 NODE_ENV=production SERVER_SSR=true babel-node ./server/server.prod.js"
   },
   "repository": {
     "type": "git",
