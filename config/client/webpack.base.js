@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-const commonPaths = require('./paths')
+const commonPaths = require('../paths')
 
 module.exports = {
   entry: {

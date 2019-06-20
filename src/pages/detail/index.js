@@ -27,7 +27,8 @@ export default class Detail extends React.Component {
 
   onLoadData = async () => {
     let { dispatch, match: { params: { id } = {} } = {} } = this.props
-    dispatch(getMovieInfo(id))
+
+    if (!window.__PRELOADED__) dispatch(getMovieInfo(id))
     dispatch(getMovieComments(id))
   }
 

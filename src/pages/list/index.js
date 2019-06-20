@@ -20,7 +20,7 @@ export default class List extends React.Component {
     }
   }
   componentDidMount() {
-    this.onLoadData()
+    if (!window.__PRELOADED__) this.onLoadData()
   }
 
   onLoadData = async () => {

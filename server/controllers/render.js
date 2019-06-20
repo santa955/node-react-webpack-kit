@@ -41,6 +41,7 @@ export default (req, res, initState) => {
         </head>
         <body>
           <div id="root">${html}</div>
+          <script>window.__PRELOADED__ = true</script>
           <script>window.__PRELOADED_STATE__ = ${JSON.stringify(initState)}</script>
           ${webExtractor.getScriptTags()}
         </body>
