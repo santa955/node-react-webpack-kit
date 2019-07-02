@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames/bind'
 import { getMovieInfo, getMovieComments } from '../../redux/action/detail'
+import Star from '../../components/star'
+import RatingDetail from './rating-detail'
 import Comment from './comment'
 import styles from './styles.styl'
 
@@ -63,59 +65,11 @@ export default class Detail extends React.Component {
             <div className={cx('score-main')}>
               <div className={cx('score')}>
                 <span className={cx('score-txt')}>{rating.average}</span>
-                <span className={cx('stars')}>
-                  <b className={cx('star')}></b>
-                  <b className={cx('star')}></b>
-                  <b className={cx('star')}></b>
-                  <b className={cx('star', 'star-half')}></b>
-                </span>
+                <Star stars={`${rating.stars}`} />
                 <span className={cx('star-count')}>{ratings_count}人评分</span>
               </div>
               <div className={cx('stars-detail')}>
-                <div className={cx('star-type')}>
-                  <span className={cx('stars')}>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                  </span>
-                  <span className={cx('star-bar')}>
-                    <b className={cx('bar-active')}></b>
-                  </span>
-                </div>
-                <div className={cx('star-type')}>
-                  <span className={cx('stars')}>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                  </span>
-                  <span className={cx('star-bar')}>
-                    <b className={cx('bar-active')} style={{ width: '70%' }}></b>
-                  </span>
-                </div>
-                <div className={cx('star-type')}>
-                  <span className={cx('stars')}>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                  </span>
-                  <span className={cx('star-bar')}></span>
-                </div>
-                <div className={cx('star-type')}>
-                  <span className={cx('stars')}>
-                    <b className={cx('star')}></b>
-                    <b className={cx('star')}></b>
-                  </span>
-                  <span className={cx('star-bar')}></span>
-                </div>
-                <div className={cx('star-type')}>
-                  <span className={cx('stars')}>
-                    <b className={cx('star')}></b>
-                  </span>
-                  <span className={cx('star-bar')}></span>
-                </div>
+                <RatingDetail details={rating.details} />
               </div>
             </div>
           </div>

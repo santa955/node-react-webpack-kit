@@ -5,7 +5,7 @@ import styles from './styles.styl'
 const cx = classNames.bind(styles)
 
 export default class Star extends React.PureComponent {
-  getRate = (stars) => {
+  getRate = (stars, gray) => {
     let starsStr = stars + ''
     let star = parseInt(starsStr[0], 10)
     let half = parseInt(starsStr[1], 10)
@@ -17,16 +17,18 @@ export default class Star extends React.PureComponent {
 
     if (half > 0) arr.push('half')
 
-    for (let i = 0; i < 5 - star; i++) {
-      arr.push('gray')
+    if (gray) {
+      for (let i = 0; i < 5 - star; i++) {
+        arr.push('gray')
+      }
     }
 
     return arr
   }
 
   render() {
-    let { stars } = this.props
-    let rates = this.getRate(stars)
+    let { stars, className, gray = true } = this.props
+    let rates = this.getRate(stars, gray)
 
     return (
       <span className={cx('stars')}>
@@ -35,10 +37,12 @@ export default class Star extends React.PureComponent {
             star: true,
             half: rate === 'half',
             gray: rate === 'gray',
+            [className]: className
           })
           return <b key={index} className={css}></b>
-        })}
-      </span>
+        })
+        }
+      </span >
     )
   }
 }

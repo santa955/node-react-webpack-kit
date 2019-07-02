@@ -36,7 +36,7 @@ const modulePostCssLoader = {
 
 module.exports = webpackMerge(baseConfig, {
   mode: 'development',
-  devtool: 'eval-source-map',
+  devtool: 'cheap-source-map',
   entry: { hot: 'webpack-hot-middleware/client' },
   output: {
     path: commonPaths.outputPath,
