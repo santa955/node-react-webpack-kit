@@ -5,23 +5,10 @@ import morgan from 'morgan'
 import path from 'path'
 import nunjucks from 'nunjucks'
 import cookieParser from 'cookie-parser'
-import markdownIt from 'markdown-it'
 import hljs from 'highlight.js'
 
 const app = express()
 const PORT = process.env.PORT || 3008
-const md = new markdownIt({
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return '<pre class="hljs"><code>' +
-        hljs.highlight(lang, str, true).value +
-          '</code></pre>'
-      } catch (err) { }
-    }
-    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>'
-  }
-})
 
 app.set('view engine', 'njk');
 app.set('views', path.resolve(__dirname, 'views'))
@@ -43,11 +30,8 @@ nunjucks.configure(path.resolve(__dirname, 'views'), {
 })
 
 
-let markdownString = fs.readFileSync(path.resolve(__dirname, './20150417.md'), 'utf8')
-let HTMLString = md.render(markdownString)
-
 app.get('/', (req, res) => {
-  res.render('index', { str: HTMLString })
+  res.send('Hello World')
 })
 
 app.listen(PORT, () => {
