@@ -5,20 +5,22 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const commonPaths = require('./paths')
 const baseConfig = require('./webpack.base')
 
+const PORT = process.env.PORT || 8080
 const ASSETS_PUBLIC_PATH = '/'
 const moduleCSSLoader = {
   loader: 'css-loader',
   options: {
-    modules: false,
+    modules: true,
     sourceMap: true,
     importLoaders: 2,
-    localIdentName: '[path][name]__[local]__[hash:base64:5]'
+    localIdentName: '[local]_[hash:base64:5]'
   }
 }
 
 module.exports = webpackMerge(baseConfig, {
   mode: 'development',
   devtool: 'eval-source-map',
+  // entry: { 'hot-load': 'webpack-hot-middleware/client' },
   output: {
     path: commonPaths.outputPath,
     publicPath: ASSETS_PUBLIC_PATH,
@@ -48,17 +50,15 @@ module.exports = webpackMerge(baseConfig, {
       {
         test: /\.styl$/,
         use: ['style-loader', moduleCSSLoader, 'stylus-loader']
-      },
-      {
-        test: /\.(scss|sass)$/,
-        use: ['style-loader', moduleCSSLoader, 'sass-loader']
       }
     ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env': 'development'
+      'process.env': {
+        NODE_ENV: JSON.stringify('development')
+      }
     }),
     new HtmlWebpackPlugin({
       template: commonPaths.templatePath,
@@ -96,7 +96,7 @@ module.exports = webpackMerge(baseConfig, {
     publicPath: ASSETS_PUBLIC_PATH,
     compress: false,
     hot: true,
-    port: 8089,
+    port: PORT,
     host: '0.0.0.0',
     useLocalIp: true,
     index: 'index.html',

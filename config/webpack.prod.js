@@ -6,10 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const BabelMinifyPlugin = require('babel-minify-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const autoprefixer = require('autoprefixer')
-const path = require('path')
 const baseConfig = require('./webpack.base')
 const commonPaths = require('./paths')
 
@@ -21,10 +18,10 @@ if (isAnalyze) plugins.push(new BundleAnalyzerPlugin())
 const moduleCSSLoader = {
   loader: 'css-loader',
   options: {
-    modules: false,
+    modules: true,
     sourceMap: true,
     importLoaders: 2,
-    localIdentName: '[path][name]__[local]__[hash:base64:5]'
+    localIdentName: '[local]_[hash:base64:5]'
   }
 }
 
@@ -36,13 +33,7 @@ const modulePostCssLoader = {
       require('postcss-flexbugs-fixes'),
       autoprefixer({
         remove: false,
-        flexbox: 'no-2009',
-        browsers: [
-          '>1%',
-          'last 4 versions',
-          'Firefox ESR',
-          'not ie < 9',
-        ],
+        flexbox: 'no-2009'
       }),
     ],
   },
@@ -51,13 +42,12 @@ const modulePostCssLoader = {
 module.exports = webpackMerge(baseConfig, {
   mode: 'production',
   output: {
-    filename: `[name].[hash].js`,
+    filename: `js/[name].[hash].js`,
     path: commonPaths.outputPath,
-    chunkFilename: '[name].[chunkhash].js',
+    chunkFilename: 'js/[name].[chunkhash].js',
     publicPath: './'
   },
   module: {
-    // noParse: /\.min\.js/,
     rules: [
       {
         test: /\.css$/,
@@ -86,15 +76,6 @@ module.exports = webpackMerge(baseConfig, {
           modulePostCssLoader,
           'stylus-loader'
         ]
-      },
-      {
-        test: /\.(scss|sass)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          moduleCSSLoader,
-          modulePostCssLoader,
-          'sass-loader'
-        ]
       }
     ]
   },
@@ -110,7 +91,9 @@ module.exports = webpackMerge(baseConfig, {
       template: commonPaths.templatePath,
     }),
     new webpack.DefinePlugin({
-      'process.env': 'production'
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
   ],
   optimization: {

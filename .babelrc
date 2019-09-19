@@ -3,6 +3,7 @@
     [
       "@babel/preset-env",
       {
+        "corejs": "2.0.0",
         "targets": {
           "esmodules": true
         },
@@ -19,14 +20,6 @@
       "@babel/plugin-proposal-decorators",
       {
         "legacy": true
-      }
-    ],
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "libraryDirectory": "es",
-        "style": true
       }
     ],
     "@babel/plugin-proposal-function-sent",

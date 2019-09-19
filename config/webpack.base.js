@@ -1,5 +1,4 @@
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const commonPaths = require('./paths')
 
@@ -9,16 +8,16 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-        options: {
-          // emitWarning: process.env.NODE_ENV !== 'production',
-          emitWarning: false
-        },
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.(js|jsx)$/,
+      //   loader: 'eslint-loader',
+      //   exclude: /node_modules/,
+      //   options: {
+      //     // emitWarning: process.env.NODE_ENV !== 'production',
+      //     emitWarning: false
+      //   },
+      // },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
@@ -51,7 +50,12 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx'],
-    alias: {}
+    alias: {
+      '@components': `${commonPaths.sourcePath}/components`,
+      '@pages': `${commonPaths.sourcePath}/pages`,
+      '@libs': `${commonPaths.sourcePath}/libs`,
+      '@redux': `${commonPaths.sourcePath}/redux`,
+    }
   },
   plugins: [
     new ProgressBarPlugin(),
@@ -59,9 +63,7 @@ module.exports = {
   ],
   // 定义非直接引用依赖
   // 定义第三方直接用Script引入而不需要打包的类库
-  // 使用方式即为 var $ = require("jquery")
   externals: {
-    window: 'window',
-    jquery: '$'
+    window: 'window'
   }
 }
