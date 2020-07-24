@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const webpackMerge = require('webpack-merge')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { merge: webpackMerge } = require('webpack-merge')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const BabelMinifyPlugin = require('babel-minify-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -18,10 +18,11 @@ if (isAnalyze) plugins.push(new BundleAnalyzerPlugin())
 const moduleCSSLoader = {
   loader: 'css-loader',
   options: {
-    modules: true,
     sourceMap: true,
     importLoaders: 2,
-    localIdentName: '[local]_[hash:base64:5]'
+    modules: {
+      localIdentName: '[local]_[hash:base64:5]'
+    },
   }
 }
 

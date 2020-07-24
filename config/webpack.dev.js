@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const webpackMerge = require('webpack-merge')
+const { merge: webpackMerge } = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const commonPaths = require('./paths')
@@ -10,10 +10,11 @@ const ASSETS_PUBLIC_PATH = '/'
 const moduleCSSLoader = {
   loader: 'css-loader',
   options: {
-    modules: true,
     sourceMap: true,
     importLoaders: 2,
-    localIdentName: '[local]_[hash:base64:5]'
+    modules: {
+      localIdentName: '[local]_[hash:base64:5]'
+    },
   }
 }
 

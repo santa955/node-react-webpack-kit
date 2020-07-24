@@ -6,5 +6,4 @@ npm-debug.log
 dist/
 **/.sass-cache
 .vscode
-package-lock.json
 .editorconfig
