@@ -1,7 +1,7 @@
 {
-  "name": "airwallex-front-end-interview-codechallenge",
+  "name": "node-react-webpack-kit",
   "version": "0.0.1",
-  "description": "Airwallex Front-End Interview Code Challenge",
+  "description": "Build a SPA with React.js",
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
@@ -17,14 +17,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yandan66/airwallex-front-end-interview.git"
+    "url": "git+https://github.com/santa955/node-react-webpack-kit.git"
   },
   "author": "yandan66",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yandan66/airwallex-front-end-interview/issues"
+    "url": "https://github.com/santa955/node-react-webpack-kit/issues"
   },
-  "homepage": "https://github.com/yandan66/airwallex-front-end-interview#readme",
+  "homepage": "https://github.com/santa955/node-react-webpack-kit",
   "dependencies": {
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
