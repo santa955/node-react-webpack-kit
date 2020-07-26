@@ -95,7 +95,7 @@ module.exports = webpackMerge(baseConfig, {
   devServer: {
     contentBase: commonPaths.outputPath,
     publicPath: ASSETS_PUBLIC_PATH,
-    compress: false,
+    compress: true,
     hot: true,
     port: PORT,
     host: '0.0.0.0',
