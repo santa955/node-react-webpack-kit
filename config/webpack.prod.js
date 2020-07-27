@@ -6,6 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const BabelMinifyPlugin = require('babel-minify-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin');
 const autoprefixer = require('autoprefixer')
 const baseConfig = require('./webpack.base')
 const commonPaths = require('./paths')
@@ -96,48 +97,50 @@ module.exports = webpackMerge(baseConfig, {
         NODE_ENV: JSON.stringify('production')
       }
     }),
+    new ManifestPlugin()
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [new OptimizeCSSAssetsPlugin({})],
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        vendors: {
-          chunks: 'all',
-          test: /(react|react-dom|react-dom-router|redux|react-redux)/,
-          priority: 10,
-          name: 'vendors',
-        },
-        antd: {
-          name: 'antd',
-          priority: 11,
-          test: /(antd|\@ant-design)/,
-          chunks: 'all'
-        },
-        libs: {
-          name: 'libs',
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all',
-          priority: 9,
-        },
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [new OptimizeCSSAssetsPlugin({})],
+  //   splitChunks: {
+  //     chunks: 'all',
+  //     cacheGroups: {
+  //       vendors: {
+  //         chunks: 'all',
+  //         test: /react|react-dom|react-dom-router|redux|react-redux/,
+  //         priority: 10,
+  //         name: 'cc',
+  //       },
+  //       antd: {
+  //         name: 'antd',
+  //         priority: 11,
+  //         test: /antd|\@ant-design/,
+  //         chunks: 'all'
+  //       },
+  //       libs: {
+  //         name: 'libs',
+  //         test: /[\\/]node_modules[\\/]/,
+  //         chunks: 'all',
+  //         priority: 9,
+  //       },
 
-        // 将所有的样式文件打包到单个项目
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true
-        }
+  //       // 将所有的样式文件打包到单个项目
+  //       styles: {
+  //         name: 'styles',
+  //         test: /\.css$/,
+  //         chunks: 'all',
+  //         enforce: true,
+  //         priority: 111
+  //       }
 
-        // commons: {
-        //   name: 'commons',
-        //   test: path.resolve(commonPaths.sourcePath, ('/components')), // 可自定义拓展你的规则
-        //   minChunks: 2, // 最小共用次数
-        //   priority: 5,
-        //   reuseExistingChunk: true
-        // }
-      }
-    }
-  }
+  //       // commons: {
+  //       //   name: 'commons',
+  //       //   test: path.resolve(commonPaths.sourcePath, ('/components')), // 可自定义拓展你的规则
+  //       //   minChunks: 2, // 最小共用次数
+  //       //   priority: 5,
+  //       //   reuseExistingChunk: true
+  //       // }
+  //     }
+  //   }
+  // }
 })

@@ -27,9 +27,13 @@
   "homepage": "https://github.com/santa955/node-react-webpack-kit",
   "dependencies": {
     "classnames": "^2.2.6",
+    "express": "^4.17.1",
+    "moment": "^2.27.0",
+    "nunjucks": "^3.2.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-loadable": "^5.5.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
@@ -83,7 +87,7 @@
     "progress-bar-webpack-plugin": "^2.1.0",
     "react-hot-loader": "^4.12.21",
     "script-ext-html-webpack-plugin": "^2.1.4",
-    "serialize-javascript": "^2.1.1",
+    "serialize-javascript": "^4.0.0",
     "style-loader": "^1.2.1",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
@@ -92,6 +96,7 @@
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
+    "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "^5.0.9"
   }
 }

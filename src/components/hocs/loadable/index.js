@@ -1,4 +1,5 @@
 import React from 'react'
+import Loadable from 'react-loadable'
 
 export default Component => props => {
   return (
@@ -6,4 +7,13 @@ export default Component => props => {
       <Component {...props} />
     </React.Suspense>
   )
+}
+
+export const ReactLoadable = loader => {
+  return Loadable({
+    loader,
+    loading: () => {
+      return <div>Loading...</div>
+    }
+  })
 }

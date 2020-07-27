@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import Modal from '@components/modal'
 import { resetInvite, postInvite } from '@redux/action/home'
 import styles from './styles.styl'
@@ -11,7 +12,7 @@ const cx = classNames.bind(styles)
   home: state.home
 }))
 export default class Home extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       showInviteModal: false,
@@ -114,7 +115,7 @@ export default class Home extends React.Component {
     })
   }
 
-  render() {
+  render () {
     let { showInviteModal } = this.state
     let { home: { loading, success, error, errMsg } } = this.props
 
@@ -124,6 +125,7 @@ export default class Home extends React.Component {
           <p className={cx('intro')}>A better way <br /> to enjoy every day.</p>
           <p className={cx('desc')}>Be the first to know when we launch.</p>
           <button className={cx('btn-request')} onClick={this.onShowIniviteModal}>Request an invite</button>
+          {moment().format('YYYY/MM/DD HH:mm:ss')}
         </div>
         <Modal
           visible={showInviteModal}
