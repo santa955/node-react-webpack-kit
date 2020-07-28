@@ -1,5 +1,5 @@
 import React, { lazy } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { ReactLoadable } from '@components/hocs/loadable'
 import DefaultLayout from '@components/hocs/default-layout'
 import FallbackRoutes from './fallback'
@@ -11,22 +11,24 @@ const routes = [{
 
 export default () => {
   return (
-    <Switch>
-      {FallbackRoutes.map((route, index) =>
-        <Route
-          exact
-          key={index}
-          path={route.path}
-          component={ReactLoadable(route.component)} />
-      )}
-      {routes.map((route, index) =>
-        <DefaultLayout
-          exact
-          key={index}
-          path={route.path}
-          component={ReactLoadable(route.component)} />
-      )}
-      <Redirect to='/404' />
-    </Switch>
+    <BrowserRouter>
+      <Switch>
+        {FallbackRoutes.map((route, index) =>
+          <Route
+            exact
+            key={index}
+            path={route.path}
+            component={ReactLoadable(route.component)} />
+        )}
+        {routes.map((route, index) =>
+          <DefaultLayout
+            exact
+            key={index}
+            path={route.path}
+            component={ReactLoadable(route.component)} />
+        )}
+        <Redirect to='/404' />
+      </Switch>
+    </BrowserRouter>
   )
 }

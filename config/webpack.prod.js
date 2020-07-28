@@ -6,11 +6,12 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const BabelMinifyPlugin = require('babel-minify-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin')
 const autoprefixer = require('autoprefixer')
 const baseConfig = require('./webpack.base')
 const commonPaths = require('./paths')
 
+const ASSETS_PUBLIC_PATH = '/'
 const plugins = []
 const isAnalyze = typeof process.env.BUNDLE_ANALYZE !== 'undefined'
 
@@ -47,7 +48,7 @@ module.exports = webpackMerge(baseConfig, {
     filename: `js/[name].[hash].js`,
     path: commonPaths.outputPath,
     chunkFilename: 'js/[name].[chunkhash].js',
-    publicPath: './'
+    publicPath: ASSETS_PUBLIC_PATH
   },
   module: {
     rules: [
@@ -65,7 +66,26 @@ module.exports = webpackMerge(baseConfig, {
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true
+              lessOptions: {
+                javascriptEnabled: true
+              }
+            }
+          }
+        ]
+      },
+      {// antd
+        test: /\.less$/,
+        include: /antdTheme/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          modulePostCssLoader,
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              }
             }
           }
         ]
