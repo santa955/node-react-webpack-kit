@@ -7,7 +7,8 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server --color --config config/webpack.dev.js",
     "build:analyze": "cross-env BUNDLE_ANALYZE=true webpack --config config/webpack.prod.js",
-    "build": "webpack --config config/webpack.prod.js"
+    "build": "webpack --config config/webpack.prod.js",
+    "server": "node server/index.js"
   },
   "browserslist": [
     ">1%",
@@ -26,8 +27,11 @@
   },
   "homepage": "https://github.com/santa955/node-react-webpack-kit",
   "dependencies": {
+    "chalk": "^4.1.0",
     "classnames": "^2.2.6",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "helmet": "^3.23.3",
     "moment": "^2.27.0",
     "nunjucks": "^3.2.2",
     "prop-types": "^15.7.2",

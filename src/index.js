@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import getStore from '@redux/store'
 import Routes from './routes'
@@ -11,9 +10,7 @@ const store = getStore()
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <Routes />
   </Provider>,
   document.getElementById('root')
 )
