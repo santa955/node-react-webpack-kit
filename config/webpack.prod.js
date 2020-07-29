@@ -3,10 +3,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { merge: webpackMerge } = require('webpack-merge')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const BabelMinifyPlugin = require('babel-minify-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const baseConfig = require('./webpack.base')
 const commonPaths = require('./paths')
@@ -108,7 +108,7 @@ module.exports = webpackMerge(baseConfig, {
       filename: `${commonPaths.cssFolder}/[name].[hash].css`,
       chunkFilename: `${commonPaths.cssFolder}/[name].[chunkhash].css`,
     }),
-    new BabelMinifyPlugin(),
+    new OptimizeCSSAssetsPlugin(),
     new HtmlWebpackPlugin({
       template: commonPaths.templatePath,
     }),
@@ -119,48 +119,39 @@ module.exports = webpackMerge(baseConfig, {
     }),
     new ManifestPlugin()
   ],
-  // optimization: {
-  //   minimize: true,
-  //   minimizer: [new OptimizeCSSAssetsPlugin({})],
-  //   splitChunks: {
-  //     chunks: 'all',
-  //     cacheGroups: {
-  //       vendors: {
-  //         chunks: 'all',
-  //         test: /react|react-dom|react-dom-router|redux|react-redux/,
-  //         priority: 10,
-  //         name: 'cc',
-  //       },
-  //       antd: {
-  //         name: 'antd',
-  //         priority: 11,
-  //         test: /antd|\@ant-design/,
-  //         chunks: 'all'
-  //       },
-  //       libs: {
-  //         name: 'libs',
-  //         test: /[\\/]node_modules[\\/]/,
-  //         chunks: 'all',
-  //         priority: 9,
-  //       },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          chunks: 'all',
+          test: /react|react-dom|react-dom-router|redux|react-redux/,
+          priority: 10,
+          name: 'vender',
+        },
+        antd: {
+          name: 'antd',
+          priority: 11,
+          test: /antd|\@ant-design/,
+          chunks: 'all'
+        },
+        libs: {
+          name: 'libs',
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+          priority: 9,
+        },
 
-  //       // 将所有的样式文件打包到单个项目
-  //       styles: {
-  //         name: 'styles',
-  //         test: /\.css$/,
-  //         chunks: 'all',
-  //         enforce: true,
-  //         priority: 111
-  //       }
-
-  //       // commons: {
-  //       //   name: 'commons',
-  //       //   test: path.resolve(commonPaths.sourcePath, ('/components')), // 可自定义拓展你的规则
-  //       //   minChunks: 2, // 最小共用次数
-  //       //   priority: 5,
-  //       //   reuseExistingChunk: true
-  //       // }
-  //     }
-  //   }
-  // }
+        // commons: {
+        //   name: 'commons',
+        //   test: path.resolve(commonPaths.sourcePath, ('/components')), // 可自定义拓展你的规则
+        //   minChunks: 2, // 最小共用次数
+        //   priority: 5,
+        //   reuseExistingChunk: true
+        // }
+      }
+    }
+  }
 })

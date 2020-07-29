@@ -12,7 +12,8 @@ COPY package*.json ./
 RUN npm install --production
 
 # Bundle app source
-COPY ./dist ./
+COPY ./dist ./dist
+
 COPY ./server ./server
 
 EXPOSE 8080
