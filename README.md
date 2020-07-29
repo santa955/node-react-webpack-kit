@@ -23,7 +23,7 @@ $ npm run server
 ```
 
 # DEPLOY WITH DOCKER?
-Yes, there is a `Dockfile` at the project dictionary root, you also can custom your own `Dockerfile` to match your mind.
+Yes, there is a `Dockfile` at root dictionary of the project, you can also custom your own `Dockerfile` to match your mind.
 
 **NOTE:** If you deploy with docker, you must run `npm run build` script at first.
 
